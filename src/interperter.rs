@@ -134,7 +134,7 @@ impl Interperter {
         for line in lines {
             let bline = line.split(' ').collect::<Vec<&str>>();
             let cmd:Option<Commands> = match bline[0] {
-                "AVIATE" => Some(Commands::AVIATE(bline[1].parse::<usize>().unwrap())),
+                "AVIATE" => Some(Commands::AVIATE(bline[1].parse::<usize>().expect("AVIATE MUST BE WITH A NUMBER"))),
                 "BARRY" => Some(Commands::BARRY),
                 "BEE" => Some(Commands::BEE),
                 "BLACK" => Some(Commands::BLACK),
