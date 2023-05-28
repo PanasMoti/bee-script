@@ -50,7 +50,7 @@ impl Interperter {
     pub fn new() -> Self {
         Self {
             bee_script: std::fs::read_to_string(BEEMOVIESCRIPTFILE).
-            unwrap(),
+            unwrap().split('\r').collect::<Vec<&str>>().concat(),
             stack : Stack::new(),
             instructions: Vec::new(),
             current_instruction: 0
@@ -130,11 +130,13 @@ impl Interperter {
     }
 
     pub fn exec(&mut self,code:String) {
+        let code = code.split('\r').collect::<Vec<&str>>().concat();
+        // println!("{:?}",code);
         let lines = code.split('\n').collect::<Vec<&str>>().iter().map(|&s| s.into()).collect::<Vec<String>>();
         for line in lines {
             let bline = line.split(' ').collect::<Vec<&str>>();
             let cmd:Option<Commands> = match bline[0] {
-                "AVIATE" => Some(Commands::AVIATE(bline[1].parse::<usize>().expect("AVIATE MUST BE WITH A NUMBER"))),
+                "AVIATE" => Some(Commands::AVIATE(bline[1].parse::<usize>().unwrap())),
                 "BARRY" => Some(Commands::BARRY),
                 "BEE" => Some(Commands::BEE),
                 "BLACK" => Some(Commands::BLACK),

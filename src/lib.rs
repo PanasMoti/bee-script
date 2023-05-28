@@ -42,15 +42,18 @@ mod tests {
     #[test]
     fn test4() {
         let mut i = Interperter::new();
-        let code = String::from("YELLOW\nBEE\nBLACK\nFLY 1\n");
+        let code = String::from("AVIATE 1\nBLACK\n");
         i.exec(code);
-        // println!("{:?}",i);
+        println!("{:?}",i);
     }
     #[test]
     fn test5() {
         let mut i = Interperter::new();
         let code = std::fs::read_to_string("testing/bee.bs").unwrap();
+        // println!("{:?}",code);
         i.exec(code);
+        // println!("{:?}",i);
+
 
     }
     
